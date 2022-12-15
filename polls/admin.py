@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Poll, Choice
+from . import models
 
-admin.site.register(Poll)
-admin.site.register(Choice)
+
+@admin.register(models.Poll)
+class PollAdmin(admin.ModelAdmin):
+    list_display = ['id', 'question', 'created_by', 'pub_date']
+
+
+@admin.register(models.Choice)
+class ChoiceAdmin(admin.ModelAdmin):
+    list_display = ['id', 'poll', 'choice_text']
